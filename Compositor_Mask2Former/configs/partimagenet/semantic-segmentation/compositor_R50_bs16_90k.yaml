@@ -1,0 +1,43 @@
+_BASE_: Base-PartImageNet-SemanticSegmentation.yaml
+MODEL:
+  META_ARCHITECTURE: "Compositor"
+  SEM_SEG_HEAD:
+    NAME: "CompositorHead"
+    IGNORE_VALUE: 255
+    NUM_PART_CLASSES: 41
+    NUM_OBJECT_CLASSES: 159
+    LOSS_WEIGHT: 1.0
+    CONVS_DIM: 256
+    MASK_DIM: 256
+    NORM: "GN"
+    # pixel decoder
+    PIXEL_DECODER_NAME: "BasePixelDecoder"
+    IN_FEATURES: ["res2", "res3", "res4", "res5"]
+    DEFORMABLE_TRANSFORMER_ENCODER_IN_FEATURES: ["res3", "res4", "res5"]
+    COMMON_STRIDE: 4
+    TRANSFORMER_ENC_LAYERS: 6
+  COMPOSITOR:
+    TRANSFORMER_DECODER_NAME: "CompositorTransformerDecoder"
+    TRANSFORMER_IN_FEATURE: "multi_scale_pixel_decoder"
+    DEEP_SUPERVISION: True
+    NO_OBJECT_WEIGHT: 0.1
+    PART_CLASS_WEIGHT: 1.33
+    PART_MASK_WEIGHT: 3.33
+    PART_DICE_WEIGHT: 3.33
+    OBJECT_CLASS_WEIGHT: 0.67
+    OBJECT_MASK_WEIGHT: 1.67
+    OBJECT_DICE_WEIGHT: 1.67
+    HIDDEN_DIM: 256
+    NUM_PART_QUERIES: 30
+    NUM_OBJECT_QUERIES: 5
+    NHEADS: 8
+    DROPOUT: 0.0
+    DIM_FEEDFORWARD: 2048
+    ENC_LAYERS: 0
+    PRE_NORM: False
+    ENFORCE_INPUT_PROJ: False
+    SIZE_DIVISIBILITY: 32
+    DEC_LAYERS: 10  # 9 decoder layers, add one for the loss on learnable query
+    TRAIN_NUM_POINTS: 12544
+    OVERSAMPLE_RATIO: 3.0
+    IMPORTANCE_SAMPLE_RATIO: 0.75
