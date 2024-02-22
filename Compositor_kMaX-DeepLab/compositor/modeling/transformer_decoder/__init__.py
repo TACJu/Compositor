@@ -1,1 +1,0 @@
-from .compositor_transformer_decoder import CompositorTransformerDecoder

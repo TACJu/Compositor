@@ -188,10 +188,10 @@ class CompositorEvaluator(DatasetEvaluator):
         part_acc[part_acc_valid] = part_tp[part_acc_valid] / part_pos_gt[part_acc_valid]
         part_iou_valid = (part_pos_gt + part_pos_pred) > 0
         part_union = part_pos_gt + part_pos_pred - part_tp
-        part_iou[part_acc_valid] = part_tp[part_acc_valid] / part_union[part_acc_valid]
+        part_iou[part_iou_valid] = part_tp[part_iou_valid] / part_union[part_iou_valid]
         part_macc = np.sum(part_acc[part_acc_valid]) / np.sum(part_acc_valid)
-        part_miou = np.sum(part_iou[part_acc_valid]) / np.sum(part_iou_valid)
-        part_fiou = np.sum(part_iou[part_acc_valid] * part_class_weights[part_acc_valid])
+        part_miou = np.sum(part_iou[part_iou_valid]) / np.sum(part_iou_valid)
+        part_fiou = np.sum(part_iou[part_iou_valid] * part_class_weights[part_iou_valid])
         part_pacc = np.sum(part_tp) / np.sum(part_pos_gt)
 
         object_acc = np.full(self._num_object_classes, np.nan, dtype=float)
@@ -204,10 +204,10 @@ class CompositorEvaluator(DatasetEvaluator):
         object_acc[object_acc_valid] = object_tp[object_acc_valid] / object_pos_gt[object_acc_valid]
         object_iou_valid = (object_pos_gt + object_pos_pred) > 0
         object_union = object_pos_gt + object_pos_pred - object_tp
-        object_iou[object_acc_valid] = object_tp[object_acc_valid] / object_union[object_acc_valid]
+        object_iou[object_iou_valid] = object_tp[object_iou_valid] / object_union[object_iou_valid]
         object_macc = np.sum(object_acc[object_acc_valid]) / np.sum(object_acc_valid)
-        object_miou = np.sum(object_iou[object_acc_valid]) / np.sum(object_iou_valid)
-        object_fiou = np.sum(object_iou[object_acc_valid] * object_class_weights[object_acc_valid])
+        object_miou = np.sum(object_iou[object_iou_valid]) / np.sum(object_iou_valid)
+        object_fiou = np.sum(object_iou[object_iou_valid] * object_class_weights[object_iou_valid])
         object_pacc = np.sum(object_tp) / np.sum(object_pos_gt)
 
         res = {}

@@ -160,7 +160,7 @@ class SoftClusterMultiheadAttention(nn.MultiheadAttention):
             if attn_mask is not None:
                 attn += attn_mask
             attn = softmax(attn, dim=1)
-            attn = softmax(attn, dim=-1)
+            attn = attn / attn.sum(dim=1, keepdim=True)
             if dropout_p > 0.0:
                 attn = dropout(attn, p=dropout_p)
             # (B, Nt, Ns) x (B, Ns, E) -> (B, Nt, E)
@@ -1045,6 +1045,7 @@ class CompositorTransformerDecoder(nn.Module):
         self.transformer_pixel2part_layers = nn.ModuleList()
         self.transformer_part_self_attention_layers = nn.ModuleList()
         self.transformer_part2object_layers = nn.ModuleList()
+        self.transformer_object_self_attention_layers = nn.ModuleList()
         self.transformer_part_ffn_layers = nn.ModuleList()
         self.transformer_object_ffn_layers = nn.ModuleList()
 
@@ -1069,6 +1070,15 @@ class CompositorTransformerDecoder(nn.Module):
 
             self.transformer_part2object_layers.append(
                 SoftClusterAttentionLayer(
+                    d_model=hidden_dim,
+                    nhead=nheads,
+                    dropout=0.0,
+                    normalize_before=pre_norm,
+                )
+            )
+
+            self.transformer_object_self_attention_layers.append(
+                SelfAttentionLayer(
                     d_model=hidden_dim,
                     nhead=nheads,
                     dropout=0.0,
@@ -1198,7 +1208,6 @@ class CompositorTransformerDecoder(nn.Module):
 
             mask_index = torch.where(object_attn_mask.sum(1) == object_attn_mask.shape[1])
             object_attn_mask[mask_index[0],:,mask_index[1]] = False
-            object_attn_mask[torch.where(object_attn_mask.sum(-1) == object_attn_mask.shape[-1])] = False
 
             part_output = self.transformer_pixel2part_layers[i](
                 part_output, src[level_index],
