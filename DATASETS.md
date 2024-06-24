@@ -20,7 +20,7 @@ You can set the location for builtin datasets by `export DETECTRON2_DATASETS=/pa
 If left unset, the default is `./datasets` relative to your current working directory.
 
 
-## Expected dataset structure for [PartImageNet](https://github.com/TACJu/PartImageNet):
+## Expected dataset structure for [PartImageNet](https://drive.google.com/file/d/1rZAECl3XF55NqJfW7Z9N63MFAvXupNuy/view?usp=sharing):
 
 ```
 PartImageNet/
@@ -35,4 +35,18 @@ PartImageNet/
     val_whole/
     test/
     test_whole/
+```
+
+## Expected dataset structure for [Pascal-Part](https://drive.google.com/file/d/162IWo6BmPXJek5Wfw-JautqKHZLBcgNY/view?usp=sharing):
+
+```
+Pascal_Part/
+  JPEGImages/
+    train/
+    val/
+  annotations/
+    train/
+    train_whole/
+    val/
+    val_whole/
 ```

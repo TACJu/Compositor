@@ -1,6 +1,6 @@
 # Compositor: Bottom-Up Clustering and Compositing for Robust Part and Object Segmentation
 
-This repo contains the code for our paper [**Compositor: Bottom-Up Clustering and Compositing for Robust Part and Object Segmentation**](https://arxiv.org/abs/2306.07404)
+This repo contains the data and code for our paper [**Compositor: Bottom-Up Clustering and Compositing for Robust Part and Object Segmentation**](https://arxiv.org/abs/2306.07404)
 
 <div align="center">
   <img src="imgs/teaser.png" width="100%" height="100%"/>
@@ -11,6 +11,11 @@ This repo contains the code for our paper [**Compositor: Bottom-Up Clustering an
 ## Installation
 
 See [Installation Instructions](INSTALL.md).
+
+## Dataset Sources
+
+- [PartImageNet](https://drive.google.com/file/d/1rZAECl3XF55NqJfW7Z9N63MFAvXupNuy/view?usp=sharing)
+- [Pascal-Part](https://drive.google.com/file/d/162IWo6BmPXJek5Wfw-JautqKHZLBcgNY/view?usp=sharing)
 
 ## Getting Started
 
