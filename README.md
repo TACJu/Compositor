@@ -14,8 +14,8 @@ See [Installation Instructions](INSTALL.md).
 
 ## Dataset Sources
 
-- [PartImageNet](https://drive.google.com/file/d/1rZAECl3XF55NqJfW7Z9N63MFAvXupNuy/view?usp=sharing)
-- [Pascal-Part](https://drive.google.com/file/d/162IWo6BmPXJek5Wfw-JautqKHZLBcgNY/view?usp=sharing)
+- [PartImageNet](https://huggingface.co/datasets/turkeyju/PartImageNet/blob/main/PartImageNet_Seg.zip)
+- [Pascal-Part](https://huggingface.co/datasets/turkeyju/PartImageNet/blob/main/Pascal_Part.zip)
 
 ## Getting Started
 
